@@ -1,0 +1,57 @@
+get:
+  tags:
+    - Объявления
+  summary: Получить объявление по ID
+  operationId: GetAd
+  description: |
+    Получить информацию об объявлении
+  responses:
+    '200':
+      description: Информация об объявлении успешно получена
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Ad.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено
+put:
+  tags:
+    - Объявления
+  summary: Изменить объявление по ID
+  operationId: PutAd
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Ad.yaml
+  responses:
+    '201':
+      description: Объявление было изменено
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Ad.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено
+    '422':
+      description: Неверные данные
+delete:
+  tags:
+    - Объявления
+  summary: Удалить объявление по ID
+  operationId: DeleteAd
+  description: |
+    Удалить объявление по ID
+  responses:
+    '204':
+      description: Объявление было удалено
+    '401':
+      description: Отказано в доступе
+    '402':
+      description: Не может быть удален
+    '404':
+      description: Не найдено

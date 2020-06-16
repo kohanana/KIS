@@ -1,0 +1,24 @@
+type: object
+required:
+  - name
+  - activeDayCount
+  - price
+properties:
+  id:
+    description: Идентификатор плана размещения объявления
+    readOnly: true
+    type: integer
+  name:
+    description: Название плана размещения объявления
+    type: string
+  description:
+    description: Описание плана
+    type: string
+  activeDayCount:
+    description: Количество дней действия плана
+    type: integer
+    example: 30
+  price:
+    description: Стоимость действия плана
+    type: integer
+    example: 300

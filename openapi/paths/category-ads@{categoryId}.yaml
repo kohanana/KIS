@@ -1,0 +1,20 @@
+get:
+  tags:
+    - Объявления
+  summary: Получить все объявления категории
+  operationId: GetAdsOfCategory
+  description: |
+    Получить все объявления категории по его ID
+  responses:
+    '200':
+      description: Информация о объявлениях категории успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Ad.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено

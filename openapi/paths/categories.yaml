@@ -1,0 +1,41 @@
+get:
+  tags:
+    - Категории
+  summary: Получить информацию о всех категориях
+  operationId: GetCategories
+  description: |
+    Получить информацию о всех категориях объявлений
+  responses:
+    '200':
+      description: Информация о категориях была успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Category.yaml
+    '401':
+      description: Отказано в доступе
+post:
+  tags:
+    - Категории
+  summary: Добавить новую категорию
+  operationId: PostCategory
+  description: |
+    Добавить новую категорию
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Category.yaml
+  responses:
+    '200':
+      description: Категория была успешно добавлена
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Category.yaml
+    '401':
+      description: Отказано в доступе
+    '422':
+      description: Неверные данные

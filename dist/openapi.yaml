@@ -1,0 +1,608 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: Авито API
+  contact:
+    name: Анна Струк
+    email: anna.kohana@gmail.com
+servers:
+  - url: 'https://example.com/v1.0'
+    description: Live Server
+tags:
+  - name: Пользователь
+    description: |
+      В этом разделе основные методы манипуляции
+      с данными пользователя
+  - name: Планы размещения объявлений
+    description: |
+      В этом разделе основные методы манипуляции
+      с данными обо всех планах размещения объявлений
+  - name: Категории
+    description: |
+      В этом разделе основные методы манипуляции
+      с данными обо всех категориях объявлений
+  - name: Объявления
+    description: |
+      В этом разделе основные методы манипуляции
+      с данными обо всех объявлениях
+security:
+  - SecretApiKey: []
+  - JWT: []
+paths:
+  /plans:
+    get:
+      tags:
+        - Планы размещения объявлений
+      summary: Получить информацию о всех планах размещения объявлений
+      operationId: GetPlans
+      description: |
+        Получить информацию о всех планах размещения объявлений
+      responses:
+        '200':
+          description: Информация о планах была успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Plans'
+        '401':
+          description: Отказано в доступе
+    post:
+      tags:
+        - Планы размещения объявлений
+      summary: Добавить новый план размещения объявлений
+      operationId: PostPlan
+      description: |
+        Добавить новый план размещений объявлений
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plans'
+      responses:
+        '200':
+          description: План размещения объявлений был успешно добавлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plans'
+        '401':
+          description: Отказано в доступе
+        '422':
+          description: Неверные данные
+  '/plan@{id}':
+    get:
+      tags:
+        - Планы размещения объявлений
+      summary: Получить план размещения по ID
+      operationId: GetPlan
+      description: |
+        Получить информацию о плане размещения по ID
+      responses:
+        '200':
+          description: Информация о плане размещения успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plans'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+    put:
+      tags:
+        - Планы размещения объявлений
+      summary: Изменить план размещения по ID
+      operationId: PutPlan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plans'
+      responses:
+        '201':
+          description: План был изменен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plans'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+        '422':
+          description: Неверные данные
+    delete:
+      tags:
+        - Планы размещения объявлений
+      summary: Удалить план размещения по ID
+      operationId: DeletePlan
+      description: |
+        Удалить план размещения по ID
+      responses:
+        '204':
+          description: План размещения был удален
+        '401':
+          description: Отказано в доступе
+        '402':
+          description: Не может быть удален
+        '404':
+          description: Не найдено
+  /users:
+    get:
+      tags:
+        - Пользователь
+      summary: Получить информацию о пользователях
+      operationId: GetUsers
+      description: |
+        Получить информацию о пользователях
+      responses:
+        '200':
+          description: Информация о пользователях была успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '401':
+          description: Отказано в доступе
+    post:
+      tags:
+        - Пользователь
+      summary: Добавить нового пользователя
+      operationId: PostUser
+      description: |
+        Добавить нового пользователя
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Пользователь был успешно добавлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Отказано в доступе
+        '422':
+          description: Неверные данные
+  '/user/{id}':
+    get:
+      tags:
+        - Пользователь
+      summary: Получить пользователя по ID
+      operationId: GetUser
+      description: |
+        Получить информацию о пользователе по ID
+      responses:
+        '200':
+          description: Информация о пользователе успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+    put:
+      tags:
+        - Пользователь
+      summary: Добавить или изменить пользователя по ID
+      operationId: PutUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Пользователь был добавлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+        '409':
+          description: Пользователь существует и не может быть обновлен
+        '422':
+          description: Неверные данные
+    delete:
+      tags:
+        - Пользователь
+      summary: Удалить пользователя по ID
+      operationId: DeleteUser
+      description: |
+        Удалить пользователя по ID
+      responses:
+        '204':
+          description: Пользователь был удален
+        '401':
+          description: Отказано в доступе
+        '402':
+          description: Не может быть удален
+        '404':
+          description: Не найдено
+  /categories:
+    get:
+      tags:
+        - Категории
+      summary: Получить информацию о всех категориях
+      operationId: GetCategories
+      description: |
+        Получить информацию о всех категориях объявлений
+      responses:
+        '200':
+          description: Информация о категориях была успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        '401':
+          description: Отказано в доступе
+    post:
+      tags:
+        - Категории
+      summary: Добавить новую категорию
+      operationId: PostCategory
+      description: |
+        Добавить новую категорию
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: Категория была успешно добавлена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '401':
+          description: Отказано в доступе
+        '422':
+          description: Неверные данные
+  '/category/{id}':
+    get:
+      tags:
+        - Категории
+      summary: Получить категорию по ID
+      operationId: GetCategory
+      description: |
+        Получить информацию о категории по ID
+      responses:
+        '200':
+          description: Информация о категории успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+    put:
+      tags:
+        - Категории
+      summary: Изменить категорию по ID
+      operationId: PutCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '201':
+          description: Категория была изменена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+        '422':
+          description: Неверные данные
+    delete:
+      tags:
+        - Категории
+      summary: Удалить категорию по ID
+      operationId: DeleteCategory
+      description: |
+        Удалить категорию по ID
+      responses:
+        '204':
+          description: Категория была удалена
+        '401':
+          description: Отказано в доступе
+        '402':
+          description: Не может быть удален
+        '404':
+          description: Не найдено
+  /ads:
+    get:
+      tags:
+        - Объявления
+      summary: Получить информацию о всех объявлениях
+      operationId: GetAnnouncements
+      description: |
+        Получить информацию о всех объявлениях
+      responses:
+        '200':
+          description: Информация о всех объявлениях
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ad'
+        '401':
+          description: Отказано в доступе
+    post:
+      tags:
+        - Объявления
+      summary: Добавить новое объявление
+      operationId: PostAnnouncement
+      description: |
+        Добавить новое объявление
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ad'
+      responses:
+        '200':
+          description: Объявление было успешно добавлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ad'
+        '401':
+          description: Отказано в доступе
+        '422':
+          description: Неверные данные
+  '/ad/{id}':
+    get:
+      tags:
+        - Объявления
+      summary: Получить объявление по ID
+      operationId: GetAd
+      description: |
+        Получить информацию об объявлении
+      responses:
+        '200':
+          description: Информация об объявлении успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ad'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+    put:
+      tags:
+        - Объявления
+      summary: Изменить объявление по ID
+      operationId: PutAd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ad'
+      responses:
+        '201':
+          description: Объявление было изменено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ad'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+        '422':
+          description: Неверные данные
+    delete:
+      tags:
+        - Объявления
+      summary: Удалить объявление по ID
+      operationId: DeleteAd
+      description: |
+        Удалить объявление по ID
+      responses:
+        '204':
+          description: Объявление было удалено
+        '401':
+          description: Отказано в доступе
+        '402':
+          description: Не может быть удален
+        '404':
+          description: Не найдено
+  '/adsOfUser/{userId}':
+    get:
+      tags:
+        - Объявления
+      summary: Получить все объявления пользователя
+      operationId: GetAdsOfUser
+      description: |
+        Получить все объявления пользователя по его ID
+      responses:
+        '200':
+          description: Информация о объявлениях пользователя успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ad'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+  '/adsOfCategory/{categoryId}':
+    get:
+      tags:
+        - Объявления
+      summary: Получить все объявления категории
+      operationId: GetAdsOfCategory
+      description: |
+        Получить все объявления категории по его ID
+      responses:
+        '200':
+          description: Информация о объявлениях категории успешно получена
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ad'
+        '401':
+          description: Отказано в доступе
+        '404':
+          description: Не найдено
+components:
+  schemas:
+    Plans:
+      type: object
+      required:
+        - name
+        - activeDayCount
+        - price
+      properties:
+        id:
+          description: Идентификатор плана размещения объявления
+          readOnly: true
+          type: integer
+        name:
+          description: Название плана размещения объявления
+          type: string
+        description:
+          description: Описание плана
+          type: string
+        activeDayCount:
+          description: Количество дней действия плана
+          type: integer
+          example: 30
+        price:
+          description: Стоимость действия плана
+          type: integer
+          example: 300
+    ServerTimestamp:
+      type: string
+      description: 'Read-only timestamp, automatically assigned on back-end.'
+      format: date-time
+      readOnly: true
+    User:
+      type: object
+      required:
+        - name
+        - phoneNumber
+        - password
+      properties:
+        id:
+          description: Идентификатор пользователя
+          readOnly: true
+          type: integer
+        name:
+          description: ФИО пользователя
+          type: string
+          maxLength: 255
+          example: Anna Kohana
+        password:
+          description: The token's password
+          type: string
+          format: password
+          writeOnly: true
+        phoneNumber:
+          description: Номер телефона
+          type: string
+          example: 8 (800) 555 35-35
+        email:
+          description: Адрес электронной почты
+          type: string
+          example: avito@example.com
+        createdTime:
+          description: Время создания аккаунта
+          allOf:
+            - $ref: '#/components/schemas/ServerTimestamp'
+        updatedTime:
+          description: Время редактирования аккаунта
+          allOf:
+            - $ref: '#/components/schemas/ServerTimestamp'
+    Category:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          description: Идентификатор категории
+          type: integer
+        name:
+          description: Название категории
+          type: string
+        description:
+          description: Описание категории
+          type: string
+    Ad:
+      type: object
+      required:
+        - name
+        - price
+        - locality
+      properties:
+        id:
+          description: Идентификатор объявления
+          readOnly: true
+          type: integer
+        name:
+          description: Заголовок объявления
+          type: string
+          maxLength: 255
+          example: Ноутбук
+        description:
+          description: Описание объявления
+          type: string
+        price:
+          description: Цена товара/услуги
+          type: integer
+        locality:
+          description: Населенный пункт
+          type: string
+          maxLength: 100
+          example: Севастополь
+        isActive:
+          description: Устарело ли объявление
+          type: boolean
+        userId:
+          description: Пользователь выложивший объявление
+          allOf:
+            - $ref: '#/components/schemas/User'
+        categoryId:
+          description: Категория объявления
+          allOf:
+            - $ref: '#/components/schemas/Category'
+        planId:
+          description: План размещения объявления
+          allOf:
+            - $ref: '#/components/schemas/Plans'
+        createdTime:
+          description: Время создания аккаунта
+          allOf:
+            - $ref: '#/components/schemas/ServerTimestamp'
+        updatedTime:
+          description: Время редактирования аккаунта
+          allOf:
+            - $ref: '#/components/schemas/ServerTimestamp'

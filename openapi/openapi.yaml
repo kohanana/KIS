@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: Авито API
+  contact:
+    name: Анна Струк
+    email: anna.kohana@gmail.com
+servers:
+  - url: 'https://example.com/v1.0'
+    description: Live Server
+tags:
+  - name: Пользователь
+    description: |
+      В этом разделе основные методы манипуляции
+      с данными пользователя
+  - name: Планы размещения объявлений
+    description: |
+      В этом разделе основные методы манипуляции
+      с данными обо всех планах размещения объявлений
+  - name: Категории
+    description: |
+      В этом разделе основные методы манипуляции
+      с данными обо всех категориях объявлений
+  - name: Объявления
+    description: |
+      В этом разделе основные методы манипуляции
+      с данными обо всех объявлениях
+security:
+  - SecretApiKey: []
+  - JWT: []
+paths:
+  '/plans':
+    $ref: ./paths/plans.yaml
+  '/plan@{id}':
+    $ref: ./paths/plan@{id}.yaml
+  '/users':
+    $ref: ./paths/users.yaml
+  '/user/{id}':
+    $ref: ./paths/user@{id}.yaml
+  '/categories':
+    $ref: ./paths/categories.yaml
+  '/category/{id}':
+    $ref: ./paths/category@{id}.yaml
+  '/ads':
+    $ref: ./paths/ads.yaml
+  '/ad/{id}':
+    $ref: ./paths/ad@{id}.yaml
+  '/adsOfUser/{userId}':
+    $ref: ./paths/user-ads@{userId}.yaml
+  '/adsOfCategory/{categoryId}':
+    $ref: ./paths/category-ads@{categoryId}.yaml

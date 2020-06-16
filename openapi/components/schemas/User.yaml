@@ -1,0 +1,36 @@
+type: object
+required:
+  - name
+  - phoneNumber
+  - password
+properties:
+  id:
+    description: Идентификатор пользователя
+    readOnly: true
+    type: integer
+  name:
+    description: ФИО пользователя
+    type: string
+    maxLength: 255
+    example: Anna Kohana
+  password:
+    description: The token's password
+    type: string
+    format: password
+    writeOnly: true
+  phoneNumber:
+    description: Номер телефона
+    type: string
+    example: 8 (800) 555 35-35
+  email:
+    description: Адрес электронной почты
+    type: string
+    example: avito@example.com
+  createdTime:
+    description: Время создания аккаунта
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Время редактирования аккаунта
+    allOf:
+      - $ref: ./ServerTimestamp.yaml

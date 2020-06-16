@@ -1,0 +1,41 @@
+get:
+  tags:
+    - Планы размещения объявлений
+  summary: Получить информацию о всех планах размещения объявлений
+  operationId: GetPlans
+  description: |
+    Получить информацию о всех планах размещения объявлений
+  responses:
+    '200':
+      description: Информация о планах была успешно получена
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Plans.yaml
+    '401':
+      description: Отказано в доступе
+post:
+  tags:
+    - Планы размещения объявлений
+  summary: Добавить новый план размещения объявлений
+  operationId: PostPlan
+  description: |
+    Добавить новый план размещений объявлений
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Plans.yaml
+  responses:
+    '200':
+      description: План размещения объявлений был успешно добавлен
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Plans.yaml
+    '401':
+      description: Отказано в доступе
+    '422':
+      description: Неверные данные

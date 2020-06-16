@@ -1,0 +1,49 @@
+type: object
+required:
+  - name
+  - price
+  - locality
+properties:
+  id:
+    description: Идентификатор объявления
+    readOnly: true
+    type: integer
+  name:
+    description: Заголовок объявления
+    type: string
+    maxLength: 255
+    example: Ноутбук
+  description:
+    description: Описание объявления
+    type: string
+  price:
+    description: Цена товара/услуги
+    type: integer
+  locality:
+    description: Населенный пункт
+    type: string
+    maxLength: 100
+    example: Севастополь
+  isActive:
+    description: Устарело ли объявление
+    type: boolean
+  userId:
+    description: Пользователь выложивший объявление
+    allOf:
+      - $ref: ./User.yaml
+  categoryId:
+    description: Категория объявления
+    allOf:
+      - $ref: ./Category.yaml
+  planId:
+    description: План размещения объявления
+    allOf:
+      - $ref: ./Plans.yaml
+  createdTime:
+    description: Время создания аккаунта
+    allOf:
+      - $ref: ./ServerTimestamp.yaml
+  updatedTime:
+    description: Время редактирования аккаунта
+    allOf:
+      - $ref: ./ServerTimestamp.yaml

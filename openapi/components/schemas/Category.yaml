@@ -1,0 +1,13 @@
+type: object
+required:
+  - name
+properties:
+  id:
+    description: Идентификатор категории
+    type: integer
+  name:
+    description: Название категории
+    type: string
+  description:
+    description: Описание категории
+    type: string

@@ -1,0 +1,41 @@
+get:
+  tags:
+    - Объявления
+  summary: Получить информацию о всех объявлениях
+  operationId: GetAnnouncements
+  description: |
+    Получить информацию о всех объявлениях
+  responses:
+    '200':
+      description: Информация о всех объявлениях
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Ad.yaml
+    '401':
+      description: Отказано в доступе
+post:
+  tags:
+    - Объявления
+  summary: Добавить новое объявление
+  operationId: PostAnnouncement
+  description: |
+    Добавить новое объявление
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Ad.yaml
+  responses:
+    '200':
+      description: Объявление было успешно добавлено
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Ad.yaml
+    '401':
+      description: Отказано в доступе
+    '422':
+      description: Неверные данные

@@ -1,0 +1,57 @@
+get:
+  tags:
+    - Планы размещения объявлений
+  summary: Получить план размещения по ID
+  operationId: GetPlan
+  description: |
+    Получить информацию о плане размещения по ID
+  responses:
+    '200':
+      description: Информация о плане размещения успешно получена
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Plans.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено
+put:
+  tags:
+    - Планы размещения объявлений
+  summary: Изменить план размещения по ID
+  operationId: PutPlan
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Plans.yaml
+  responses:
+    '201':
+      description: План был изменен
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Plans.yaml
+    '401':
+      description: Отказано в доступе
+    '404':
+      description: Не найдено
+    '422':
+      description: Неверные данные
+delete:
+  tags:
+    - Планы размещения объявлений
+  summary: Удалить план размещения по ID
+  operationId: DeletePlan
+  description: |
+    Удалить план размещения по ID
+  responses:
+    '204':
+      description: План размещения был удален
+    '401':
+      description: Отказано в доступе
+    '402':
+      description: Не может быть удален
+    '404':
+      description: Не найдено
